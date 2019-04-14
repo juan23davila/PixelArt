@@ -26,6 +26,7 @@ var colorPersonalizado = document.getElementById('color-personalizado');
 let colorIndicador     = document.getElementById('indicador-de-color');
 let paleta             = document.getElementById('paleta');
 let grillaPixs         = document.getElementById('grilla-pixeles');
+let btnBorrar          = document.getElementById("borrar");
 let clickStatus        = false;
 
 $(document).ready(function(){
@@ -99,7 +100,51 @@ function createPixelGrid(){
     newDiv = document.createElement("div");
     grillaPixs.appendChild(newDiv);
   }
+  
+  //Se adicionan los eventos que modifican el grid de color
   grillaPixs.addEventListener("mouseover", changeGridPXColor);
   grillaPixs.addEventListener("mousedown", changeClickStatus);
   grillaPixs.addEventListener("mouseup", changeClickStatus);
 }
+
+/**
+ * Borra contenido de la grilla
+ */
+btnBorrar.addEventListener("click", function(){
+  //Se obtiene los píxeles
+  let pixeles = grillaPixs.getElementsByTagName("div");
+  for(let i=0; i<pixeles.length; i++){
+    $(pixeles[i]).animate({"backgroundColor":""},1000);
+  }
+});
+
+/**
+ * Se adicionan los eventos para cargar superheroes a la grilla
+ */
+let imgBat = document.getElementById("batman").parentElement;
+imgBat.addEventListener("click", function(){
+  cargarSuperheroe(batman);
+});
+
+let imgWon = document.getElementById("wonder").parentElement;
+imgWon.addEventListener("click", function(){
+  cargarSuperheroe(wonder);
+});
+
+let imgFla = document.getElementById("flash").parentElement;
+imgFla.addEventListener("click", function(){
+  cargarSuperheroe(flash);
+});
+
+let imgInv = document.getElementById("invisible").parentElement;
+imgInv.addEventListener("click", function(){
+  cargarSuperheroe(invisible);
+});
+
+/**
+ * Habilitar la funcionalidad de guardar imagen
+ */
+let saveButton = document.getElementById("guardar");
+saveButton.addEventListener("click", function(){
+  guardarPixelArt();
+});
